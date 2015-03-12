@@ -10,7 +10,11 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.ActionBar;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +40,9 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	
 	ActionBar actionBar;
 	
+	private static int RESULT_LOAD_IMAGE;
+
+	static String IMAGE_PATH = "com.potato.gspot.MainActivity.MESSAGE";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +117,6 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
                                                 .attachTo(rightLowerButton)
                                                 .setStartAngle(180)
                                                 .setEndAngle(220)
-                                                .setRadius(60)
                                                 .build();
 
         // Listen menu open and close events to animate the button content view
@@ -145,12 +151,55 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
         rlIcon2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(MainActivity.this, "Gallery",	Toast.LENGTH_SHORT).show();
+//				Toast.makeText(MainActivity.this, "Gallery",	Toast.LENGTH_SHORT).show();
+				openGallery();
 			}
 
 		});
 
     }
+    
+    private void openGallery(){
+    	Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images
+    			.Media.EXTERNAL_CONTENT_URI);
+
+    	startActivityForResult(i, RESULT_LOAD_IMAGE);
+    }
+    
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
+			Uri selectedImage = data.getData();
+			
+			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+			
+			Cursor c = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+			
+			c.moveToFirst();
+			
+			int columnIndex = c.getColumnIndex(filePathColumn[0]);
+			
+			String picturePath = c.getString(columnIndex);
+			
+			Toast.makeText(this, picturePath, 1).show();
+			
+			c.close();
+			
+			Intent i = new Intent(this, CreatePost.class);
+			i.putExtra(IMAGE_PATH, picturePath);
+			startActivity(i);
+			
+//			ImageView img = (ImageView)findViewById(R.id.imageView);
+			
+//			img.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+			
+			
+		}
+		
+	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
