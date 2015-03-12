@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="security_questions">
+	    <item>Whats up?</item>
+	    <item>Who is your crush?</item>
+	    <item>Are you gay?</item>
+	    <item>Who is your first pet?</item>
+	    <item>Who is your favorite teacher?</item>
+	    <item>Who killed San Gokou?</item>
+	    <item>What is the size of your index finger?</item>
+	    <item>Do you take a bath?</item>
+    </string-array>
+</resources>
