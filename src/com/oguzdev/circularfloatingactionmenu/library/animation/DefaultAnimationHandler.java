@@ -9,6 +9,7 @@ import android.animation.PropertyValuesHolder;
 import android.graphics.Point;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
@@ -52,7 +53,8 @@ public class DefaultAnimationHandler extends MenuAnimationHandler {
 
             final ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(menu.getSubActionItems().get(i).view, pvhX, pvhY, pvhR, pvhsX, pvhsY, pvhA);
             animation.setDuration(DURATION);
-            animation.setInterpolator(new OvershootInterpolator(0.9f));
+            animation.setInterpolator(new BounceInterpolator());
+//            animation.setInterpolator(new OvershootInterpolator(0.9f));
             animation.addListener(new SubActionItemAnimationListener(menu.getSubActionItems().get(i), ActionType.OPENING));
 
             if(i == 0) {

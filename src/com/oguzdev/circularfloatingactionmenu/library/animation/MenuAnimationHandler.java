@@ -65,6 +65,7 @@ public abstract class MenuAnimationHandler {
         subActionItem.view.setScaleX(1);
         subActionItem.view.setScaleY(1);
         subActionItem.view.setAlpha(1);
+        
         if(actionType == ActionType.OPENING) {
             FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) params;
             if(menu.isSystemOverlay()) {
