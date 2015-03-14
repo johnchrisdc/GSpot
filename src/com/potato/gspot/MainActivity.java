@@ -26,9 +26,11 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements OnItemClickListener{
@@ -41,6 +43,8 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	
 	ListView listView;
 	List<RowItem> rowItems;
+	
+	TextView noPost;
 	
 	ActionBar actionBar;
 	
@@ -61,7 +65,11 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
         
         setContentView(R.layout.activity_main);
         
-      //Hmmm basta sa DB
+        listView =  (ListView) findViewById(R.id.listView);
+        
+        noPost = (TextView) findViewById(R.id.textViewNoPost);
+        
+        //Hmmm basta sa DB
 	    mh =  new AccountsDatabaseAdapter(this);
         
         rowItems = new ArrayList<RowItem>();
@@ -73,19 +81,36 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
         String[] post_date = mh.helper.getAllPostDate().toString().split(DELIMITER, -1);
         Bitmap[] post_image = mh.helper.getAllBlob();
         
-        
+        //Hide natin dito, tinatamad ako mag layout
+        noPost.setVisibility(View.GONE);
         
         //If not null ung imahe
-        if(mh.helper.getAllBlob()!=null){
+        
+        
+        
+        if(mh.helper.allPostLength()>0){
+        	//Hide no Post
+        	noPost.setVisibility(View.GONE);
+        
+        	int totalPost = post_title.length - 1;
+        	
         	for(int i=0; i<post_title.length-1; i++){
-            	RowItem item = new RowItem(post_image[i], post_title[i], post_date[i]);
+        		
+        		int postNo = i + 1;
+        		
+            	RowItem item = new RowItem(post_image[i], post_title[i], post_date[i] + " POST no. " + postNo + " of " + totalPost);
             	rowItems.add(item);
             }
-        }
+        }else{
+        	//Show no Post
+        	
+        	noPost.setVisibility(View.VISIBLE);
+        	
+        }        	
         
         
         
-        listView =  (ListView) findViewById(R.id.listView);
+        
         
         CustomListViewAdapter adapter = new CustomListViewAdapter(this, R.layout.list_item, rowItems);
         listView.setAdapter(adapter);

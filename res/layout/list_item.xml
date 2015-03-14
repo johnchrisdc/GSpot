@@ -6,12 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    
+    
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
+        android:maxHeight="200dp"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:adjustViewBounds="true"
         android:src="@drawable/dummy_post_1" />
 
     <TextView

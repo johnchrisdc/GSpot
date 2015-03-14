@@ -137,6 +137,10 @@ public class AccountsDatabaseAdapter{
 			return count;
 		}
 		
+		/*
+		 * Return Posts title
+		 */
+		
 		public String getAllPostTitle(){
 			
 			String titles = "";
@@ -145,7 +149,7 @@ public class AccountsDatabaseAdapter{
 			SQLiteDatabase db = helper.getWritableDatabase();
 			ContentValues con = new ContentValues();
 			String [] columns = {MyHelper.TITLE};
-			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, null);
+			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, MyHelper.TITLE);
 			StringBuffer buffer = new StringBuffer();
 						
 			while(c.moveToNext()){
@@ -153,6 +157,10 @@ public class AccountsDatabaseAdapter{
 			}
 			return titles;
 		}
+		
+		/*
+		 * Return Posts date
+		 */
 		
 		public String getAllPostDate(){
 			
@@ -162,7 +170,7 @@ public class AccountsDatabaseAdapter{
 			SQLiteDatabase db = helper.getWritableDatabase();
 			ContentValues con = new ContentValues();
 			String [] columns = {MyHelper.DATE};
-			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, null);
+			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, MyHelper.TITLE);
 			StringBuffer buffer = new StringBuffer();
 						
 			while(c.moveToNext()){
@@ -171,6 +179,9 @@ public class AccountsDatabaseAdapter{
 			return titles;
 		}
 		
+		/*
+		 * Return the image of post in form of bitmap
+		 */
 		public Bitmap[] getAllBlob(){			
 			Bitmap[] bm = new Bitmap[allPostLength()];
 			byte[] img=null;
@@ -178,7 +189,7 @@ public class AccountsDatabaseAdapter{
 			SQLiteDatabase db = helper.getWritableDatabase();
 			ContentValues con = new ContentValues();
 			String [] columns = {MyHelper.IMAGE};
-			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, null);
+			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, MyHelper.TITLE);
 			StringBuffer buffer = new StringBuffer();
 			
 			int index = 0;
@@ -191,6 +202,8 @@ public class AccountsDatabaseAdapter{
 			return bm;
 		}
 		
+		/* Return the total size of the table
+		 */
 		public int allPostLength(){
 			int coun = 0;
 			
@@ -204,6 +217,47 @@ public class AccountsDatabaseAdapter{
 				coun++;
 			}
 			return coun;
+		}
+		
+		/*
+		 * Return the security question
+		 */
+		public String getSecurityQuestion(){
+			
+			String titles = "";
+			String delimiter = "!@!@";
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			ContentValues con = new ContentValues();
+			String [] columns = {MyHelper.QUESTION};
+			Cursor c= db.query(MyHelper.TABLE_NAME, columns, null, null, null, null, null);
+			StringBuffer buffer = new StringBuffer();
+						
+			while(c.moveToNext()){
+				titles = titles + c.getString(0);											
+			}
+			return titles;		
+		}
+		
+		public boolean getSecurityAnswer(String answer){
+			
+			String titles = "";
+			String delimiter = "!@!@";
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			ContentValues con = new ContentValues();
+			String [] columns = {MyHelper.ANSWER};
+			Cursor c= db.query(MyHelper.TABLE_NAME, columns, null, null, null, null, null);
+			StringBuffer buffer = new StringBuffer();
+						
+			while(c.moveToNext()){
+				
+				if(answer.equalsIgnoreCase(c.getString(0))){
+					return true;
+				}
+				
+			}
+			return false;	
 		}
 		
 		public boolean isPINOkay(String pass){

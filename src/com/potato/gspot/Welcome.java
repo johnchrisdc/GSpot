@@ -63,6 +63,11 @@ public class Welcome extends Activity {
 	    
 	}
 	
+	public void forget(View v){
+		Intent i = new Intent(this, ForgetPassword.class);
+		startActivity(i);
+	}
+	
 	private void setUpSignUp(){
 		password = (EditText) findViewById(R.id.editTextPassword);
 		password_reEnter = (EditText)  findViewById(R.id.editTextPasswordReenter);
@@ -101,7 +106,7 @@ public class Welcome extends Activity {
 			startActivity(i);
 			//Toast.makeText(this, "KAY", 1).show();
 		}else{
-			//Toast.makeText(this, "WTF???", 1).show();
+			Toast.makeText(this, "WTF???", 1).show();
 		}
 		
 	}
