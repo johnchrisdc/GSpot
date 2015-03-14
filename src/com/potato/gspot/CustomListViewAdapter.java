@@ -26,7 +26,7 @@ public class CustomListViewAdapter extends ArrayAdapter<RowItem>{
 	private class ViewHolder{
 		ImageView imageView;
 		TextView txtTitle;
-		TextView txtDesc;
+		TextView txtDate;
 	}
 	
 	
@@ -40,7 +40,7 @@ public class CustomListViewAdapter extends ArrayAdapter<RowItem>{
 		if(convertView == null){
 			convertView = mInflater.inflate(R.layout.list_item, null);
 			holder = new ViewHolder();
-			holder.txtDesc = (TextView)convertView.findViewById(R.id.desc);
+			holder.txtDate = (TextView)convertView.findViewById(R.id.date);
 			holder.txtTitle = (TextView)convertView.findViewById(R.id.title);
 			holder.imageView = (ImageView)convertView.findViewById(R.id.icon);
 			convertView.setTag(holder);
@@ -48,9 +48,9 @@ public class CustomListViewAdapter extends ArrayAdapter<RowItem>{
 			holder = (ViewHolder)convertView.getTag();
 		}
 		
-		holder.txtDesc.setText(rowItem.getDesc());
+		holder.txtDate.setText(rowItem.getDate());
 		holder.txtTitle.setText(rowItem.getTitle());
-		holder.imageView.setImageResource(rowItem.getImageID());
+		holder.imageView.setImageBitmap(rowItem.getImage());
 		
 		int color = Color.argb(255, mRandomizer.nextInt(256), mRandomizer.nextInt(256), mRandomizer.nextInt(256));
         

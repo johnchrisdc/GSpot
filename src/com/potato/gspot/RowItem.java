@@ -1,31 +1,33 @@
 package com.potato.gspot;
 
+import android.graphics.Bitmap;
+
 public class RowItem {
 	
-	private int imageID;
+	private Bitmap image;
 	private String title;
-	private String desc;
+	private String date;
 	
-	public RowItem(int imageID, String title, String desc){
-		this.imageID = imageID;
+	public RowItem(Bitmap imageID, String title, String desc){
+		this.image = imageID;
 		this.title = title;
-		this.desc = desc;
+		this.date = desc;
 	}
 	
-	public int getImageID(){
-		return imageID;
+	public Bitmap getImage(){
+		return image;
 	}
 	
-	public void setImageID(int imageID){
-		this.imageID = imageID;
+	public void setImageID(Bitmap image){
+		this.image = image;
 	}
 	
-	public String getDesc(){
-		return desc;
+	public String getDate(){
+		return date;
 	}
 	
-	public void setDesc(String desc){
-		this.desc = desc;
+	public void setDate(String desc){
+		this.date = desc;
 	}
 	
 	public String getTitle(){
@@ -37,6 +39,6 @@ public class RowItem {
 	}
 	
 	public String toString(){
-		return title + "\n" + desc;
+		return title + "\n" + date;
 	}
 }

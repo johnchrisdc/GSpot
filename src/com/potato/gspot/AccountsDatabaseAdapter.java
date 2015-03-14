@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 
 public class AccountsDatabaseAdapter{
 	
@@ -101,13 +104,12 @@ public class AccountsDatabaseAdapter{
 		}
 		
 		//Insert post
-		public long insertCoins(byte[] imgByte ,String title ,String desc , String date){
+		public long insertCoins(byte[] imgByte ,String title , String date){
 			SQLiteDatabase db = helper.getWritableDatabase();
 			ContentValues con = new ContentValues();
 			
 			con.put(MyHelper.IMAGE, imgByte);
 			con.put(MyHelper.TITLE, title);
-			con.put(MyHelper.DESCRIPTION, desc);
 			con.put(MyHelper.DATE, date);
 			
 			long id = db.insert(MyHelper.TABLE_NAME_PHOSTO, null, con);//methods that returns long variable
@@ -133,6 +135,75 @@ public class AccountsDatabaseAdapter{
 				
 			}
 			return count;
+		}
+		
+		public String getAllPostTitle(){
+			
+			String titles = "";
+			String delimiter = "!@!@";
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			ContentValues con = new ContentValues();
+			String [] columns = {MyHelper.TITLE};
+			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, null);
+			StringBuffer buffer = new StringBuffer();
+						
+			while(c.moveToNext()){
+				titles = titles + c.getString(0) + delimiter;											
+			}
+			return titles;
+		}
+		
+		public String getAllPostDate(){
+			
+			String titles = "";
+			String delimiter = "!@!@";
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			ContentValues con = new ContentValues();
+			String [] columns = {MyHelper.DATE};
+			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, null);
+			StringBuffer buffer = new StringBuffer();
+						
+			while(c.moveToNext()){
+				titles = titles + c.getString(0) + delimiter;											
+			}
+			return titles;
+		}
+		
+		public Bitmap[] getAllBlob(){			
+			Bitmap[] bm = new Bitmap[allPostLength()];
+			byte[] img=null;
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			ContentValues con = new ContentValues();
+			String [] columns = {MyHelper.IMAGE};
+			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, null);
+			StringBuffer buffer = new StringBuffer();
+			
+			int index = 0;
+			
+			while(c.moveToNext()){
+				img=c.getBlob(c.getColumnIndex(MyHelper.IMAGE));
+				bm[index] = BitmapFactory.decodeByteArray(img, 0, img.length);	
+				index++;
+			}
+			return bm;
+		}
+		
+		public int allPostLength(){
+			int coun = 0;
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			ContentValues con = new ContentValues();
+			String [] columns = {MyHelper.TITLE};
+			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, null);
+			StringBuffer buffer = new StringBuffer();
+						
+			while(c.moveToNext()){
+				coun++;
+			}
+			return coun;
 		}
 		
 		public boolean isPINOkay(String pass){

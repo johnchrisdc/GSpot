@@ -29,7 +29,6 @@ public class CreatePost extends Activity {
 	ImageView photo;
 	
 	EditText title;
-	EditText desciption;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,9 +44,7 @@ public class CreatePost extends Activity {
 	    photo = (ImageView) findViewById(R.id.imageViewImage);
 	    photo.setImageBitmap(BitmapFactory.decodeFile(imagePath));
 	    
-	    title = (EditText)findViewById(R.id.editTextTitle);
-	    desciption = (EditText)findViewById(R.id.editTextDescription);
-	    
+	    title = (EditText)findViewById(R.id.editTextTitle);	    
 	    
 	    // Set up the white button on the lower right corner
         // more or less with default parameter
@@ -84,12 +81,11 @@ public class CreatePost extends Activity {
 		imgByte = stream.toByteArray();
 		
 		String title_post = title.getText().toString();
-		String desciption_post = desciption.getText().toString();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm");
 		String date = sdf.format(new Date()); 
 		
-		mh.helper.insertCoins(imgByte, title_post, desciption_post, date);
+		mh.helper.insertCoins(imgByte, title_post, date);
 	}
 
 }

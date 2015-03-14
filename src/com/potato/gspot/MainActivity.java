@@ -1,21 +1,25 @@
 package com.potato.gspot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
+import android.R.array;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
@@ -29,11 +33,11 @@ import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements OnItemClickListener{
 
-	public static final String[] titles = new String[]{"Dead By Sunrise","Alapaap","Iron Man","Pwede boat?","Banana","Orange","Mixed"};
+	public static String[] titles = new String[]{"Dead By Sunrise","Alapaap"};
 	
-	public static final String[] descriptions = new String[]{"Hmmmm...","Gusto mo bang sumama?","Anemic","Only one","flowering plant","citrus fruit","mixed fruits"};
+	public static final String[] descriptions = new String[]{"Hmmmm...","Gusto mo bang sumama?"};
 	
-	public static Integer[] images = {R.drawable.dummy_post_1, R.drawable.dummy_post_2, R.drawable.dummy_post_3, R.drawable.dummy_post_4, R.drawable.banana, R.drawable.orange, R.drawable.mixed};
+	public static Integer[] images = {R.drawable.dummy_post_1, R.drawable.dummy_post_2};
 	
 	ListView listView;
 	List<RowItem> rowItems;
@@ -42,7 +46,11 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	
 	private static int RESULT_LOAD_IMAGE;
 
+	
 	static String IMAGE_PATH = "com.potato.gspot.MainActivity.MESSAGE";
+	private static String DELIMITER = "!@!@";
+	
+	AccountsDatabaseAdapter mh;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +61,29 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
         
         setContentView(R.layout.activity_main);
         
+      //Hmmm basta sa DB
+	    mh =  new AccountsDatabaseAdapter(this);
+        
         rowItems = new ArrayList<RowItem>();
         
-        for(int i=0; i<titles.length; i++){
-        	RowItem item = new RowItem(images[i], titles[i], descriptions[i]);
-        	rowItems.add(item);
+        Log.d("GSPOT", mh.helper.getAllPostTitle().toString());
+        Log.d("GSPOT", mh.helper.getAllPostDate().toString());
+        
+        String[] post_title = mh.helper.getAllPostTitle().toString().split(DELIMITER, -1);
+        String[] post_date = mh.helper.getAllPostDate().toString().split(DELIMITER, -1);
+        Bitmap[] post_image = mh.helper.getAllBlob();
+        
+        
+        
+        //If not null ung imahe
+        if(mh.helper.getAllBlob()!=null){
+        	for(int i=0; i<post_title.length-1; i++){
+            	RowItem item = new RowItem(post_image[i], post_title[i], post_date[i]);
+            	rowItems.add(item);
+            }
         }
+        
+        
         
         listView =  (ListView) findViewById(R.id.listView);
         
