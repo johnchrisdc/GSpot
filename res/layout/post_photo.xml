@@ -8,7 +8,7 @@
         android:layout_margin="20dp"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="200dp"        
         android:orientation="vertical" >
 
         <ImageView
@@ -18,5 +18,36 @@
             android:src="@drawable/dummy_post_1" />
 
     </LinearLayout>
+    
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+            <EditText
+                android:hint="Title"
+		        android:id="@+id/editTextTitle"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:minHeight="20dp"
+		        android:ems="10" />
+            
+            <View android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+            
+            <EditText
+                android:hint="Say something"
+		        android:id="@+id/editTextDescription"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:minHeight="20dp"
+		        android:ems="10" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

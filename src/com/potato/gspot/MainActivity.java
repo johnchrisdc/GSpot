@@ -92,7 +92,7 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
         });
         
         
-     // Set up the white button on the lower right corner
+        // Set up the white button on the lower right corner
         // more or less with default parameter
         final ImageView fabIconNew = new ImageView(this);
         fabIconNew.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_new));

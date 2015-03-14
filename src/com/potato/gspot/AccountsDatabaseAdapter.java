@@ -19,16 +19,31 @@ public class AccountsDatabaseAdapter{
 	static class MyHelper extends SQLiteOpenHelper{
 		private static final String DATABASE_NAME="MyDB";
 		private static final String TABLE_NAME="accounts";
-		private static final int DATABASE_VESION=1;
+		private static final String TABLE_NAME_PHOSTO="posts";
+		
+		private static final int DATABASE_VESION=2;
 		
 		private static final String UID="_id";
 		private static final String QUESTION="question";
 		private static final String ANSWER="answer";
 		private static final String PASSWORD="password";
+		
+		private static final String PID="_pid";
+		private static final String TITLE="title";
+		private static final String DESCRIPTION="desc";
+		private static final String DATE="date";
+		private static final String IMAGE="image";
+		
+		
 		private static final String CREATE_TABLE=" CREATE TABLE " + TABLE_NAME
 				+ "(" + UID + " integer primary key autoincrement, " + QUESTION
 				+ " varchar(50), "+ ANSWER + " varchar(50), "
 				+PASSWORD +" varchar(50))";
+		
+		private static final String CREATE_TABLE_PHOSTO=" CREATE TABLE " + TABLE_NAME_PHOSTO
+				+ "(" + PID + " integer primary key autoincrement, " + IMAGE + " BLOB, " + TITLE
+				+ " varchar(50), "+ DESCRIPTION + " varchar(50), "
+				+DATE +" varchar(50))";
 		
 		private Context context;
 		
@@ -43,12 +58,12 @@ public class AccountsDatabaseAdapter{
 		public void onCreate(SQLiteDatabase db) {
 			try {
 				db.execSQL(CREATE_TABLE);
+				db.execSQL(CREATE_TABLE_PHOSTO);
 				Message.message(context,  "table_create");
 			} catch (SQLException e) {
 				Message.message(context, "" + e);
 			}
-			
-			
+	
 		}
 		
 		public int updateName(String oldName,String newName){
@@ -81,6 +96,21 @@ public class AccountsDatabaseAdapter{
 			con.put(MyHelper.ANSWER, answer);
 			con.put(MyHelper.PASSWORD, password);
 			long id = db.insert(MyHelper.TABLE_NAME, null, con);//methods that returns long variable
+			db.close();
+			return id;			
+		}
+		
+		//Insert post
+		public long insertCoins(byte[] imgByte ,String title ,String desc , String date){
+			SQLiteDatabase db = helper.getWritableDatabase();
+			ContentValues con = new ContentValues();
+			
+			con.put(MyHelper.IMAGE, imgByte);
+			con.put(MyHelper.TITLE, title);
+			con.put(MyHelper.DESCRIPTION, desc);
+			con.put(MyHelper.DATE, date);
+			
+			long id = db.insert(MyHelper.TABLE_NAME_PHOSTO, null, con);//methods that returns long variable
 			db.close();
 			return id;			
 		}
