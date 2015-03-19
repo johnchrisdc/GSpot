@@ -7,11 +7,13 @@ public class RowItem {
 	private Bitmap image;
 	private String title;
 	private String date;
+	private String description;
 	
-	public RowItem(Bitmap imageID, String title, String desc){
+	public RowItem(Bitmap imageID, String title, String desc, String date){
 		this.image = imageID;
 		this.title = title;
-		this.date = desc;
+		this.date = date;
+		this.description = desc;
 	}
 	
 	public Bitmap getImage(){
@@ -36,6 +38,14 @@ public class RowItem {
 	
 	public void setTitle(String title){
 		this.title = title;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	
+	public void setDescription(String dessc){
+		this.description = dessc;
 	}
 	
 	public String toString(){

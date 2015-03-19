@@ -27,9 +27,9 @@ public class CustomListViewAdapter extends ArrayAdapter<RowItem>{
 		ImageView imageView;
 		TextView txtTitle;
 		TextView txtDate;
+		TextView txtDesc;
 	}
-	
-	
+
 	//TLDR - Too Long Don't Read
 	
 	public View getView (int position, View convertView, ViewGroup parent){
@@ -42,6 +42,7 @@ public class CustomListViewAdapter extends ArrayAdapter<RowItem>{
 			holder = new ViewHolder();
 			holder.txtDate = (TextView)convertView.findViewById(R.id.date);
 			holder.txtTitle = (TextView)convertView.findViewById(R.id.title);
+			holder.txtDesc = (TextView)convertView.findViewById(R.id.desc);
 			holder.imageView = (ImageView)convertView.findViewById(R.id.icon);
 			convertView.setTag(holder);
 		}else{
@@ -50,6 +51,9 @@ public class CustomListViewAdapter extends ArrayAdapter<RowItem>{
 		
 		holder.txtDate.setText(rowItem.getDate());
 		holder.txtTitle.setText(rowItem.getTitle());
+		
+		holder.txtDesc.setText(rowItem.getDescription());
+		
 		holder.imageView.setImageBitmap(rowItem.getImage());
 		
 		int color = Color.argb(255, mRandomizer.nextInt(256), mRandomizer.nextInt(256), mRandomizer.nextInt(256));

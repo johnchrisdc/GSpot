@@ -37,6 +37,14 @@
             
             <View android:layout_width="match_parent"
                 android:layout_height="20dp"/>
+            
+            <EditText
+                android:hint="Description"
+		        android:id="@+id/editTextDescription"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:minHeight="20dp"
+		        android:ems="10" />
 
     </LinearLayout>
 

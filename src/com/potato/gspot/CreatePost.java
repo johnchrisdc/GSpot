@@ -11,6 +11,7 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,6 +30,7 @@ public class CreatePost extends Activity {
 	ImageView photo;
 	
 	EditText title;
+	EditText description;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class CreatePost extends Activity {
 	    photo.setImageBitmap(BitmapFactory.decodeFile(imagePath));
 	    
 	    title = (EditText)findViewById(R.id.editTextTitle);	    
+	    description  = (EditText)findViewById(R.id.editTextDescription);	
 	    
 	    // Set up the white button on the lower right corner
         // more or less with default parameter
@@ -81,11 +84,16 @@ public class CreatePost extends Activity {
 		imgByte = stream.toByteArray();
 		
 		String title_post = title.getText().toString();
+		String decription_post = description.getText().toString();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm");
 		String date = sdf.format(new Date()); 
 		
-		mh.helper.insertCoins(imgByte, title_post, date);
+		mh.helper.insertCoins(imgByte, title_post, decription_post, date);
+		
+		Intent i = new Intent(this, MainActivity.class);
+		startActivity(i);
+		
 	}
 
 }

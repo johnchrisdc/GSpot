@@ -104,12 +104,13 @@ public class AccountsDatabaseAdapter{
 		}
 		
 		//Insert post
-		public long insertCoins(byte[] imgByte ,String title , String date){
+		public long insertCoins(byte[] imgByte ,String title,String desc , String date){
 			SQLiteDatabase db = helper.getWritableDatabase();
 			ContentValues con = new ContentValues();
 			
 			con.put(MyHelper.IMAGE, imgByte);
 			con.put(MyHelper.TITLE, title);
+			con.put(MyHelper.DESCRIPTION, desc);
 			con.put(MyHelper.DATE, date);
 			
 			long id = db.insert(MyHelper.TABLE_NAME_PHOSTO, null, con);//methods that returns long variable
@@ -170,6 +171,23 @@ public class AccountsDatabaseAdapter{
 			SQLiteDatabase db = helper.getWritableDatabase();
 			ContentValues con = new ContentValues();
 			String [] columns = {MyHelper.DATE};
+			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, MyHelper.TITLE);
+			StringBuffer buffer = new StringBuffer();
+						
+			while(c.moveToNext()){
+				titles = titles + c.getString(0) + delimiter;											
+			}
+			return titles;
+		}
+		
+		public String getAllPostDesc(){
+			
+			String titles = "";
+			String delimiter = "!@!@";
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			ContentValues con = new ContentValues();
+			String [] columns = {MyHelper.DESCRIPTION};
 			Cursor c= db.query(MyHelper.TABLE_NAME_PHOSTO, columns, null, null, null, null, MyHelper.TITLE);
 			StringBuffer buffer = new StringBuffer();
 						

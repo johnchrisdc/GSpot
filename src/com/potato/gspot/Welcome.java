@@ -91,7 +91,24 @@ public class Welcome extends Activity {
 		String questioning = questions.getSelectedItem().toString();
 		String answering = answer.getText().toString();
 		
-		mh.helper.insertData(questioning, answering, passwerd);		
+		String passwerd_reenter = password_reEnter.getText().toString();
+		
+		if(passwerd.length() > 0 && questioning.length() > 0 && answering.length() > 0){
+			
+			if(passwerd_reenter.equals(passwerd)){
+				if(mh.helper.insertData(questioning, answering, passwerd) > 0){
+					form_signUp.setVisibility(View.GONE);
+					form_login.setVisibility(View.VISIBLE);
+				}
+			}else{
+				Toast.makeText(this, "Password mismatched", 1).show();
+			}
+			
+			
+		}else{
+			Toast.makeText(this, "Please fill all information.", 1).show();
+		}
+		
 	}
 	
 	private void setUpLogin(){
@@ -106,7 +123,7 @@ public class Welcome extends Activity {
 			startActivity(i);
 			//Toast.makeText(this, "KAY", 1).show();
 		}else{
-			Toast.makeText(this, "WTF???", 1).show();
+			Toast.makeText(this, "Login failed.", 1).show();
 		}
 		
 	}

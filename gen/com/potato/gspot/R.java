@@ -63,33 +63,47 @@ public final class R {
         public static final int ic_action_camera=0x7f020013;
         public static final int ic_action_gallery=0x7f020014;
         public static final int ic_action_new=0x7f020015;
-        public static final int ic_launcher=0x7f020016;
-        public static final int mixed=0x7f020017;
-        public static final int orange=0x7f020018;
-        public static final int straw=0x7f020019;
+        public static final int ic_action_okay=0x7f020016;
+        public static final int ic_launcher=0x7f020017;
+        public static final int mixed=0x7f020018;
+        public static final int orange=0x7f020019;
+        public static final int straw=0x7f02001a;
     }
     public static final class id {
-        public static final int buttonAction=0x7f090004;
-        public static final int buttonLogin=0x7f090007;
-        public static final int buttonSignUp=0x7f09000d;
-        public static final int desc=0x7f090002;
-        public static final int editTextAnswer=0x7f09000c;
-        public static final int editTextPassword=0x7f090009;
-        public static final int editTextPasswordLogin=0x7f090006;
-        public static final int editTextPasswordReenter=0x7f09000a;
-        public static final int form_login=0x7f090005;
-        public static final int form_signUp=0x7f090008;
-        public static final int icon=0x7f090001;
+        public static final int button1=0x7f090005;
+        public static final int buttonAction=0x7f09000f;
+        public static final int buttonLogin=0x7f090012;
+        public static final int buttonSignUp=0x7f090018;
+        public static final int date=0x7f090008;
+        public static final int desc=0x7f09000b;
+        public static final int editTextAnswer=0x7f090017;
+        public static final int editTextAnswering=0x7f090004;
+        public static final int editTextDescription=0x7f09000e;
+        public static final int editTextPassword=0x7f090014;
+        public static final int editTextPasswordLogin=0x7f090011;
+        public static final int editTextPasswordReenter=0x7f090015;
+        public static final int editTextTitle=0x7f09000d;
+        public static final int form_login=0x7f090010;
+        public static final int form_signUp=0x7f090013;
+        public static final int icon=0x7f090009;
+        public static final int imageViewImage=0x7f09000c;
         public static final int listView=0x7f090000;
-        public static final int spinnerQuestions=0x7f09000b;
-        public static final int title=0x7f090003;
+        public static final int spinnerQuestions=0x7f090016;
+        public static final int textView1=0x7f090002;
+        public static final int textView3=0x7f090006;
+        public static final int textViewNoPost=0x7f090001;
+        public static final int textViewOMGPasswording=0x7f090007;
+        public static final int textViewQuestioning=0x7f090003;
+        public static final int title=0x7f09000a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int list_item=0x7f030001;
-        public static final int welcome=0x7f030002;
-        public static final int welcome_login=0x7f030003;
-        public static final int welcome_signup=0x7f030004;
+        public static final int forget_password=0x7f030001;
+        public static final int list_item=0x7f030002;
+        public static final int post_photo=0x7f030003;
+        public static final int welcome=0x7f030004;
+        public static final int welcome_login=0x7f030005;
+        public static final int welcome_signup=0x7f030006;
     }
     public static final class string {
         public static final int action_settings=0x7f070002;
